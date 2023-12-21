@@ -7,7 +7,7 @@ import { LogService } from './log.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class StarWarsService {
+export class DespesesService {
   private characters = [
     { name: 'Luke Skywalker', side: '' , pagatPer : 1},
     { name: 'Darth Vader', side: '' , pagatPer: 1}
@@ -25,7 +25,7 @@ export class StarWarsService {
     var domini = window.location.hostname;
     var URL_ws="";
     var host_local="192.168.1.37";
-    var host_remot="marcpv1.zapto.org";
+    var  host_remot="marcpv1.zapto.org";
 
     if (domini.includes(':')) {
       URL_ws="http://" + host_local + "/despeses/ws.php?format=json";

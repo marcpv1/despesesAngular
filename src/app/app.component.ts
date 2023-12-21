@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { StarWarsService } from './star-wars.service';
+import { DespesesService } from './despeses.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,9 @@ import { StarWarsService } from './star-wars.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  swService: StarWarsService;
+  swService: DespesesService;
 
-  constructor (swService: StarWarsService) {
+  constructor (swService: DespesesService) {
     this.swService = swService;
   }
 

@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit(form)" #form="ngForm">
   <div class="form-group">
-    <label for="name">Character Name</label>
+    <label for="name">Establiment</label>
     <input
     type="text"
     id="name"
@@ -8,16 +8,55 @@
     class="form-control"
     [ngModel]="defaultName"
     required
-    #nameCtrl="ngModel">
+    #nameCtrl="ngModel">    
     <span class="help-block" *ngIf="nameCtrl.invalid && nameCtrl.touched">Please enter a name!</span>
   </div>
   <div class="form-group">
-    <label for="side">Choose Side</label>
+    <label for="name">Descripció</label>
+    <input
+    type="text"
+    id="desc"
+    name="desc"
+    class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="name">Data</label>
+    <input
+    type="text"
+    id="dataC"
+    name="dataC"
+    class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="side">Pagat per</label>
     <select name="side" id="side" class="form-control" ngModel>
       <option *ngFor="let option of availableSides" [value]="option.value">
         {{ option.display }}
       </option>
     </select>
   </div>
-  <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Add Character</button>
+  <div class="form-group">
+    <label for="name">Import</label>
+    <input
+    type="text"
+    id="dataC"
+    name="dataC"
+    class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="side">Categoria</label>
+    <select name="side" id="side" class="form-control" ngModel>
+      <option *ngFor="let option of availableSides" [value]="option.value">
+        {{ option.display }}
+      </option>
+    </select>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+    <label class="form-check-label" for="flexCheckChecked">
+      Pagat amb targeta
+    </label>
+  </div>
+  <p>&nbsp;</p>
+  <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Guardar</button>
 </form>

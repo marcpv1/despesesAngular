@@ -1,10 +1,9 @@
 <a style="cursor: pointer" class="list-group-item">
   <h4 class="list-group-item-heading">{{ character.name }}</h4>
   <p>{{ character.description }}</p>
-  <p>{{ character.dateC }}</p>
+  <div class="detall">
+    <span>{{ character.dateC }}</span><div style="padding-left:3px;" class="glyphicon glyphicon-calendar"></div>        
+  </div>
+  <p>&nbsp;</p>
   <p><b><font size="+1">{{ character.price }} €</font></b></p>
-  <!--<div>
-    <button class="btn btn-primary" (click)="onAssign('light')">Light</button>
-    <button class="btn btn-danger" (click)="onAssign('dark')">Dark</button>
-  </div>-->
 </a>

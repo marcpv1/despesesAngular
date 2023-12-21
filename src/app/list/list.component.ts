@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { StarWarsService } from '../star-wars.service';
+import { DespesesService } from '../despeses.service';
 
 @Component({
   selector: 'app-list',
@@ -11,11 +11,11 @@ import { StarWarsService } from '../star-wars.service';
 export class ListComponent implements OnInit, OnDestroy {
   characters = [];
   activatedRoute: ActivatedRoute;
-  swService: StarWarsService;
+  swService: DespesesService;
   loadedSide = 'Tot';
   subscription;
 
-  constructor(activatedRoute: ActivatedRoute, swService: StarWarsService) {
+  constructor(activatedRoute: ActivatedRoute, swService: DespesesService) {
     this.activatedRoute = activatedRoute;
     this.swService = swService;
   }

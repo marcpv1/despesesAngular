@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { StarWarsService } from '../star-wars.service';
+import { DespesesService } from '../despeses.service';
 
 @Component({
   selector: 'app-item',
@@ -9,9 +9,9 @@ import { StarWarsService } from '../star-wars.service';
 })
 export class ItemComponent implements OnInit {
   @Input() character;
-  swService: StarWarsService;
+  swService: DespesesService;
 
-  constructor(swService: StarWarsService) {
+  constructor(swService: DespesesService) {
     this.swService = swService;
   }
 

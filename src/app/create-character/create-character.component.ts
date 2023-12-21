@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { StarWarsService } from '../star-wars.service';
+import { DespesesService } from '../despeses.service';
 
 @Component({
   selector: 'app-create-character',
@@ -13,10 +13,10 @@ export class CreateCharacterComponent implements OnInit {
     { display: 'Light', value: 'light' },
     { display: 'Dark', value: 'dark' }
   ]
-  swService: StarWarsService;
+  swService: DespesesService;
   defaultName = 'Obi-Wan';
 
-  constructor(swService: StarWarsService) {
+  constructor(swService: DespesesService) {
     this.swService = swService;
   }
 
