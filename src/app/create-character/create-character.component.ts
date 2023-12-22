@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { DespesesService } from '../despeses.service';
+
+import { Http, Response } from '@angular/http';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-create-character',
@@ -8,16 +10,59 @@ import { DespesesService } from '../despeses.service';
   styleUrls: ['./create-character.component.css']
 })
 export class CreateCharacterComponent implements OnInit {
-  availableSides = [
-    { display: 'None', value: '' },
-    { display: 'Light', value: 'light' },
-    { display: 'Dark', value: 'dark' }
+  Persones = [
+    { display: 'Cap', value: '0' },
+    { display: 'Marc', value: '1' },
+    { display: 'Anna', value: '2' }
   ]
-  swService: DespesesService;
-  defaultName = 'Obi-Wan';
 
-  constructor(swService: DespesesService) {
-    this.swService = swService;
+  Categories = [{idCategoria:1, Nom: 'tst1'}];
+
+  _despesesService: DespesesService;
+  defaultName = '';
+  dataC;
+  http: Http;
+
+  constructor(_despesesService: DespesesService, http: Http) {
+    this._despesesService = _despesesService;
+    this.dataC = new Date().toISOString().substring(0, 10);
+
+    this.http = http;
+
+    var host_local="192.168.1.37";
+    var host_remot="marcpv1.zapto.org";
+    var domini = window.location.hostname;
+    var URL_ws='';
+
+    if (domini.includes(':')) {
+      URL_ws="http://" + host_local + "/despeses/ws2.php?format=json";
+    } else 
+    {
+      if (domini.includes("192")) {
+        URL_ws="http://" + host_local + "/despeses/ws2.php?format=json";
+      } else {
+        URL_ws="http://" + host_remot + "/despeses/ws2.php?format=json";
+      }
+    }
+
+    console.log(URL_ws);
+
+    this.http.get(URL_ws)
+      .map((response: Response) => {
+        const data = response.json();
+        const extractedChars = data.despeses;
+        const chars = extractedChars.map((char) => {
+          return {idCategoria: char.despesa.idCategoria, Nom: char.despesa.Nom };
+        });
+        return chars;
+      }).subscribe(
+        (data) => {
+          console.log(data);
+          this.Categories = data;
+        }
+      );
+
+      console.log('Categories ' + this.Categories);
   }
 
   ngOnInit() {
@@ -28,6 +73,7 @@ export class CreateCharacterComponent implements OnInit {
       return;
     }
     console.log(submittedForm);
-    this.swService.addCharacter(submittedForm.value.name, submittedForm.value.side, 1);
+    this._despesesService.addCharacter(submittedForm.value.name, submittedForm.value.desc, submittedForm.value.persona, 
+      submittedForm.value.dataC, submittedForm.value.importC, submittedForm.value.categoria);
   }
 }

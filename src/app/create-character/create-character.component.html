@@ -12,42 +12,48 @@
     <span class="help-block" *ngIf="nameCtrl.invalid && nameCtrl.touched">Please enter a name!</span>
   </div>
   <div class="form-group">
-    <label for="name">Descripció</label>
+    <label for="desc">Descripció</label>
     <input
     type="text"
     id="desc"
     name="desc"
-    class="form-control">
+    class="form-control"
+    [ngModel]="defaultName"
+    #nameCtrl="ngModel">
   </div>
+       <div class="form-group">
+          <label for="name">Data</label>
+          <div class='input-group date' id='datetimepicker1'>
+             <input type='date' class="form-control"  id="dataC" name="dataC" [ngModel]="dataC" #nameCtrl="ngModel"/>
+             <span class="input-group-addon">
+             <span class="glyphicon glyphicon-calendar"></span>
+             </span>
+          </div>
+       </div>
+
   <div class="form-group">
-    <label for="name">Data</label>
-    <input
-    type="text"
-    id="dataC"
-    name="dataC"
-    class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="side">Pagat per</label>
-    <select name="side" id="side" class="form-control" ngModel>
-      <option *ngFor="let option of availableSides" [value]="option.value">
+    <label for="persona">Pagat per</label>
+    <select name="persona" id="persona" class="form-control" ngModel>
+      <option *ngFor="let option of Persones" [value]="option.value">
         {{ option.display }}
       </option>
     </select>
   </div>
   <div class="form-group">
-    <label for="name">Import</label>
+    <label for="importC">Import</label>
     <input
     type="text"
-    id="dataC"
-    name="dataC"
-    class="form-control">
+    id="importC"
+    name="importC"
+    class="form-control"
+    [ngModel]="defaultName"
+    #nameCtrl="ngModel">
   </div>
   <div class="form-group">
-    <label for="side">Categoria</label>
-    <select name="side" id="side" class="form-control" ngModel>
-      <option *ngFor="let option of availableSides" [value]="option.value">
-        {{ option.display }}
+    <label for="categoria">Categoria</label>
+    <select name="categoria" id="categoria" class="form-control" ngModel>
+      <option *ngFor="let option of Categories" [value]="option.idCategoria">
+        {{ option.Nom }}
       </option>
     </select>
   </div>

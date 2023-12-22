@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 
 import { LogService } from './log.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DespesesService {
@@ -56,7 +58,7 @@ export class DespesesService {
       })
       .subscribe(
         (data) => {
-          console.log(data);
+          /*console.log(data);*/
           this.characters = data;
           this.charactersChanged.next();
         }
@@ -89,14 +91,67 @@ export class DespesesService {
     this.logService.writeLog('Changed side of ' + charInfo.name + ', new side: ' + charInfo.side);
   }
 
-  addCharacter(name, side, pagatPer) {
-    const pos = this.characters.findIndex((char) => {
-      return char.name === name;
-    })
-    if (pos !== -1) {
-      return;
+  addCharacter(name, desc, persona, dataC, importC, idCategoria) {
+    console.log("establiment: " + name);
+    console.log("desc: " + desc);
+    console.log("persona: " + persona);
+    console.log("dataC: " + dataC);
+    console.log("importC: " + importC);
+    console.log("idCategoria: " + idCategoria);
+
+    var domini = window.location.hostname;
+    var URL_ws="";
+    var host_local="192.168.1.37";
+    var  host_remot="marcpv1.zapto.org";
+
+    if (domini.includes(':')) {
+      URL_ws="http://" + host_local + "/despeses/ws3.php";
+    } else 
+    {
+      if (domini.includes("192")) {
+        URL_ws="http://" + host_local + "/despeses/ws3.php";
+      } else {
+        URL_ws="http://" + host_remot + "/despeses/ws3.php";
+      }
     }
-    const newChar = {name: name, side: side, pagatPer: pagatPer};
-    this.characters.push(newChar);
+
+    let d= new _despesa("testtt");
+
+    console.log(URL_ws);
+    console.log(d);
+
+    this.callPost(URL_ws,d);
+
+  }
+
+  callPost(URL_ws:string, d: _despesa) {
+
+    /*const headers =  new HttpHeaders({'Content-Type':  'application/json'});*/
+
+
+    this.http.post(URL_ws, JSON.stringify(d)).subscribe(
+      (val) => {
+          console.log("POST call successful value returned in body", 
+                      val);
+      },
+      response => {
+          console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+      });
+  }
+ 
+}
+
+
+
+
+
+export class _despesa{
+  establiment: string;
+
+  constructor(establiment: string) {
+    this.establiment = establiment;
   }
 }
