@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 
 import { LogService } from './log.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DespesesService {
@@ -91,18 +90,22 @@ export class DespesesService {
     this.logService.writeLog('Changed side of ' + charInfo.name + ', new side: ' + charInfo.side);
   }
 
-  addCharacter(name, desc, persona, dataC, importC, idCategoria) {
+  addCharacter(name: string, desc: string, dataC: string, persona: number, importC: number, idCategoria: number, targeta:boolean) {
+
+    let _targeta=targeta ? 1 : 0;
+
     console.log("establiment: " + name);
     console.log("desc: " + desc);
     console.log("persona: " + persona);
     console.log("dataC: " + dataC);
     console.log("importC: " + importC);
     console.log("idCategoria: " + idCategoria);
+    console.log("targeta: " + _targeta);
 
     var domini = window.location.hostname;
     var URL_ws="";
     var host_local="192.168.1.37";
-    var  host_remot="marcpv1.zapto.org";
+    var host_remot="marcpv1.zapto.org";
 
     if (domini.includes(':')) {
       URL_ws="http://" + host_local + "/despeses/ws3.php";
@@ -115,7 +118,7 @@ export class DespesesService {
       }
     }
 
-    let d= new _despesa("testtt");
+    let d= new _despesa(name, desc, dataC, persona, importC, idCategoria,_targeta);
 
     console.log(URL_ws);
     console.log(d);
@@ -126,10 +129,14 @@ export class DespesesService {
 
   callPost(URL_ws:string, d: _despesa) {
 
-    /*const headers =  new HttpHeaders({'Content-Type':  'application/json'});*/
+    const httpOptions = {
+      headers: new Headers({
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type':  'application/json'
+        })
+      };
 
-
-    this.http.post(URL_ws, JSON.stringify(d)).subscribe(
+    this.http.post(URL_ws, d, httpOptions).subscribe(
       (val) => {
           console.log("POST call successful value returned in body", 
                       val);
@@ -140,18 +147,27 @@ export class DespesesService {
       () => {
           console.log("The POST observable is now completed.");
       });
+      
   }
  
 }
 
-
-
-
-
 export class _despesa{
   establiment: string;
+  descripcio:string;
+  dataC:string;
+  pagatPer:number;
+  importC:number;
+  categoria:number;
+  targeta:number;
 
-  constructor(establiment: string) {
+  constructor(establiment: string, descripcio: string, dataC: string, pagatPer: number, importC: number, categoria: number, targeta: number) {
     this.establiment = establiment;
+    this.descripcio = descripcio;
+    this.dataC = dataC;
+    this.pagatPer = pagatPer;
+    this.importC = importC;
+    this.categoria = categoria;
+    this.targeta = targeta;
   }
 }

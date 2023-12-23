@@ -21,11 +21,13 @@ export class CreateCharacterComponent implements OnInit {
   _despesesService: DespesesService;
   defaultName = '';
   dataC;
+  targeta;
   http: Http;
 
   constructor(_despesesService: DespesesService, http: Http) {
     this._despesesService = _despesesService;
     this.dataC = new Date().toISOString().substring(0, 10);
+    this.targeta = true;
 
     this.http = http;
 
@@ -73,7 +75,16 @@ export class CreateCharacterComponent implements OnInit {
       return;
     }
     console.log(submittedForm);
-    this._despesesService.addCharacter(submittedForm.value.name, submittedForm.value.desc, submittedForm.value.persona, 
-      submittedForm.value.dataC, submittedForm.value.importC, submittedForm.value.categoria);
+    this._despesesService.addCharacter(submittedForm.value.establiment, submittedForm.value.desc, submittedForm.value.dataC, submittedForm.value.persona 
+      , submittedForm.value.importC, submittedForm.value.categoria, submittedForm.value.targeta);
+
+    this.alert();
+
+    /*submittedForm.reset();
+    this.dataC = new Date().toISOString().substring(0, 10);*/
+  }
+
+  alert() {
+    window.alert('Nova despesa guardada correctament');
   }
 }
