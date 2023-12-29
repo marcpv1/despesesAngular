@@ -171,6 +171,5 @@ export class _despesa{
     this.importC = importC;
     this.categoria = categoria;
     this.targeta = targeta;
-    this.nomPagatPer = "Marc";/*(this.pagatPer==1) ? "Marc" : "Anna";*/
   }
 }
