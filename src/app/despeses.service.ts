@@ -51,7 +51,8 @@ export class DespesesService {
                   dateC: char.despesa.dataC2,
                   price: char.despesa.ImportC,
                   side: '',
-                  pagatPer: char.despesa.IdPagatPer };
+                  pagatPer: char.despesa.IdPagatPer,
+                  nomPagatPer: (char.despesa.IdPagatPer==1) ? "Marc" : "Anna" };
         });
         return chars;
       })
@@ -160,6 +161,7 @@ export class _despesa{
   importC:number;
   categoria:number;
   targeta:number;
+  nomPagatPer:string;
 
   constructor(establiment: string, descripcio: string, dataC: string, pagatPer: number, importC: number, categoria: number, targeta: number) {
     this.establiment = establiment;
@@ -169,5 +171,6 @@ export class _despesa{
     this.importC = importC;
     this.categoria = categoria;
     this.targeta = targeta;
+    this.nomPagatPer = "Marc";/*(this.pagatPer==1) ? "Marc" : "Anna";*/
   }
 }

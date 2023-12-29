@@ -24,7 +24,7 @@
        <div class="form-group">
           <label for="name">Data</label>
           <div class='input-group date' id='datetimepicker1'>
-             <input type='date' class="form-control"  id="dataC" name="dataC" [ngModel]="dataC" #nameCtrl="ngModel"/>
+             <input type='date' class="form-control"  id="dataC" name="dataC" [ngModel]="dataC" required #nameCtrl="ngModel"/>
              <span class="input-group-addon">
              <span class="glyphicon glyphicon-calendar"></span>
              </span>
@@ -33,7 +33,7 @@
 
   <div class="form-group">
     <label for="persona">Pagat per</label>
-    <select name="persona" id="persona" class="form-control" ngModel>
+    <select name="persona" id="persona" class="form-control" required ngModel>
       <option *ngFor="let option of Persones" [value]="option.value">
         {{ option.display }}
       </option>
@@ -42,16 +42,17 @@
   <div class="form-group">
     <label for="importC">Import</label>
     <input
-    type="text"
+    type="number"
     id="importC"
     name="importC"
     class="form-control"
+    required 
     [ngModel]="defaultName"
     #nameCtrl="ngModel">
   </div>
   <div class="form-group">
     <label for="categoria">Categoria</label>
-    <select name="categoria" id="categoria" class="form-control" ngModel>
+    <select name="categoria" id="categoria" class="form-control" required ngModel>
       <option *ngFor="let option of Categories" [value]="option.idCategoria">
         {{ option.Nom }}
       </option>

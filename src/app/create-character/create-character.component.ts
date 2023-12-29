@@ -11,7 +11,6 @@ import { Subject } from 'rxjs/Subject';
 })
 export class CreateCharacterComponent implements OnInit {
   Persones = [
-    { display: 'Cap', value: '0' },
     { display: 'Marc', value: '1' },
     { display: 'Anna', value: '2' }
   ]
