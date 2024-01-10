@@ -1,13 +1,13 @@
 <div>
   <ul class="nav nav-tabs">
     <li role="presentation" routerLinkActive="active">
-      <a routerLink="/despeses/Tot">Tot</a>
+      <a routerLink="/despeses/Tot">Tot ( <span>{{ importTotal }}</span> € )</a>
       </li>
     <li role="presentation" routerLinkActive="active">
-      <a routerLink="/despeses/Marc">Marc</a>
+      <a routerLink="/despeses/Marc">Marc ( Total <span>{{ importPagatPer1 }}</span> € , <span>{{ OperacioPendent1 }}</span> <span>{{ importPendentPagar1 }}</span> € )</a>
       </li>
     <li role="presentation" routerLinkActive="active">
-      <a routerLink="/despeses/Anna">Anna</a>
+      <a routerLink="/despeses/Anna">Anna ( Total <span>{{ importPagatPer2 }}</span> € , <span>{{ OperacioPendent2 }}</span> <span>{{ importPendentPagar2 }}</span> € )</a>
       </li>
   </ul>
   <router-outlet></router-outlet>

@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class DespesesService {
   private characters = [
-    { name: 'Luke Skywalker', side: '' , pagatPer : 1},
-    { name: 'Darth Vader', side: '' , pagatPer: 1}
+    { name: 'Luke Skywalker', side: '' , pagatPer : 1, price : 0},
+    { name: 'Darth Vader', side: '' , pagatPer: 1, price : 0}
   ];
   private logService: LogService;
   charactersChanged = new Subject<void>();
@@ -63,6 +63,22 @@ export class DespesesService {
           this.charactersChanged.next();
         }
       );
+  }
+
+  sumaDespeses(chosenList) {
+    let total=0;
+
+    if (chosenList==null) {chosenList='Tot';}
+    console.log('sumaDespeses ' + chosenList);
+
+    let llista=this.getCharacters(chosenList);
+
+    llista.forEach( (element) => {
+      total+=Number(element.price);
+    });
+
+    return total;
+
   }
 
   getCharacters(chosenList) {
