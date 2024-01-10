@@ -11,7 +11,7 @@ const routes = [
       { path: ':side', component: ListComponent }
     ] },
     { path: 'nova-despesa', component: CreateCharacterComponent },
-    { path: '**', redirectTo: '/despeses' }
+    { path: '**', redirectTo: '/despeses/' }
   ];
 
   @NgModule({

@@ -13,6 +13,7 @@ import { LogService } from './log.service';
 import { CreateCharacterComponent } from './create-character/create-character.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule }  from './app-routing.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AppRoutingModule }  from './app-routing.module';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [DespesesService, LogService],
+  providers: [DespesesService, LogService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
