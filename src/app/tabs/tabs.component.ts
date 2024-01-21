@@ -49,9 +49,9 @@ export class TabsComponent implements OnInit {
 
   CarregarPagariCobrar() {
     
-      this.importTotal = this.swService.sumaDespeses(this.loadedSide);
-      this.importPagatPer1 = this.swService.sumaDespeses('Marc');
-      this.importPagatPer2 = this.swService.sumaDespeses('Anna');
+      this.importTotal = Number(this.swService.sumaDespeses(this.loadedSide).toFixed(2));
+      this.importPagatPer1 = Number(this.swService.sumaDespeses('Marc').toFixed(2));
+      this.importPagatPer2 = Number(this.swService.sumaDespeses('Anna').toFixed(2));
 
       let importDiferencia=Number(this.importPagatPer1)-Number(this.importPagatPer2);
 
