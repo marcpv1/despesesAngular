@@ -10,7 +10,7 @@ const routes = [
       { path: '', redirectTo: 'Tot', pathMatch: 'full' },
       { path: ':side', component: ListComponent }
     ] },
-    { path: 'nova-despesa', component: CreateCharacterComponent },
+    { path: 'nova-despesa/:id', component: CreateCharacterComponent },
     { path: '**', redirectTo: '/despeses/' }
   ];
 

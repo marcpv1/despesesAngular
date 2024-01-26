@@ -3,6 +3,7 @@ import { DespesesService } from '../despeses.service';
 
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-character',
@@ -22,8 +23,12 @@ export class CreateCharacterComponent implements OnInit {
   dataC;
   targeta;
   http: Http;
+  activatedRoute: ActivatedRoute;
+  nom='';
+  desc;
+  comboPersones;
 
-  constructor(_despesesService: DespesesService, http: Http) {
+  constructor(_despesesService: DespesesService, http: Http, activatedRoute: ActivatedRoute) {
     this._despesesService = _despesesService;
     this.dataC = new Date().toISOString().substring(0, 10);
     this.targeta = true;
@@ -34,6 +39,8 @@ export class CreateCharacterComponent implements OnInit {
     var host_remot="marcpv1.zapto.org";
     var domini = window.location.hostname;
     var URL_ws='';
+    this.activatedRoute=activatedRoute;
+    //this.desc='aasfdf';
 
     if (domini.includes(':')) {
       URL_ws="http://" + host_local + "/despeses/ws2.php?format=json";
@@ -46,7 +53,7 @@ export class CreateCharacterComponent implements OnInit {
       }
     }
 
-    console.log(URL_ws);
+    //console.log(URL_ws);
 
     this.http.get(URL_ws)
       .map((response: Response) => {
@@ -58,15 +65,30 @@ export class CreateCharacterComponent implements OnInit {
         return chars;
       }).subscribe(
         (data) => {
-          console.log(data);
+          //console.log(data);
           this.Categories = data;
         }
       );
 
-      console.log('Categories ' + this.Categories);
+      //console.log('Categories ' + this.Categories);
+
   }
 
   ngOnInit() {
+
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+  
+    console.log('Valor de id ' + id);
+
+    this.comboPersones=id;
+
+    this.activatedRoute.params.subscribe(
+      (params) => {
+        id = this.activatedRoute.snapshot.paramMap.get('id');
+        this.comboPersones=id;
+      })
+      
+    //console.log('Param nom: ' + this.nom);
   }
 
   onSubmit(submittedForm) {

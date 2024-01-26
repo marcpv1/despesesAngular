@@ -33,7 +33,7 @@
 
   <div class="form-group">
     <label for="persona">Pagat per</label>
-    <select name="persona" id="persona" class="form-control" required ngModel>
+    <select name="persona" id="persona" class="form-control" required ngModel [(ngModel)]="comboPersones">
       <option *ngFor="let option of Persones" [value]="option.value">
         {{ option.display }}
       </option>
@@ -67,3 +67,4 @@
   <p>&nbsp;</p>
   <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Guardar</button>
 </form>
+<router-outlet></router-outlet>
