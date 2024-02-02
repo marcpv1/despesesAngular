@@ -9,7 +9,7 @@ import { DespesesService } from '../despeses.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit, OnDestroy {
-  characters = [];
+  despeses = [];
   activatedRoute: ActivatedRoute;
   swService: DespesesService;
   loadedSide = 'Tot';
@@ -23,13 +23,13 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params) => {
-        this.characters = this.swService.getCharacters(params.side);
+        this.despeses = this.swService.getDespeses(params.side);
         this.loadedSide = params.side;
       }
     );
-    this.subscription = this.swService.charactersChanged.subscribe(
+    this.subscription = this.swService.despesesChanged.subscribe(
       () => {
-        this.characters = this.swService.getCharacters(this.loadedSide);
+        this.despeses = this.swService.getDespeses(this.loadedSide);
       }
     );
   }

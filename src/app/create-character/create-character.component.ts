@@ -96,13 +96,10 @@ export class CreateCharacterComponent implements OnInit {
       return;
     }
     console.log(submittedForm);
-    this._despesesService.addCharacter(submittedForm.value.establiment, submittedForm.value.desc, submittedForm.value.dataC, submittedForm.value.persona 
+    this._despesesService.addDespesa(submittedForm.value.establiment, submittedForm.value.desc, submittedForm.value.dataC, submittedForm.value.persona 
       , submittedForm.value.importC, submittedForm.value.categoria, submittedForm.value.targeta);
 
     this.alert();
-
-    /*submittedForm.reset();
-    this.dataC = new Date().toISOString().substring(0, 10);*/
   }
 
   alert() {

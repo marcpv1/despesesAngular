@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class DespesesService {
-  private characters = [
-    { name: 'Luke Skywalker', side: '' , pagatPer : 1, price : 0},
-    { name: 'Darth Vader', side: '' , pagatPer: 1, price : 0}
+  private despeses = [
+    { name: 'Desp1', side: '' , pagatPer : 1, price : 0},
+    { name: 'Desp2', side: '' , pagatPer: 1, price : 0}
   ];
   private logService: LogService;
-  charactersChanged = new Subject<void>();
+  despesesChanged = new Subject<void>();
   http: Http;
 
   constructor(logService: LogService, http: Http, private router: Router) {
@@ -22,7 +22,7 @@ export class DespesesService {
     this.http = http;    
   }
 
-  fetchCharacters() {
+  fetchDespeses() {
     var domini = window.location.hostname;
     var URL_ws="";
     var host_local="192.168.1.37";
@@ -59,8 +59,8 @@ export class DespesesService {
       .subscribe(
         (data) => {
           /*console.log(data);*/
-          this.characters = data;
-          this.charactersChanged.next();
+          this.despeses = data;
+          this.despesesChanged.next();
         }
       );
   }
@@ -71,7 +71,7 @@ export class DespesesService {
     if (chosenList==null) {chosenList='Tot';}
     console.log('sumaDespeses ' + chosenList);
 
-    let llista=this.getCharacters(chosenList);
+    let llista=this.getDespeses(chosenList);
 
     llista.forEach( (element) => {
       total+=Number(element.price);
@@ -81,17 +81,17 @@ export class DespesesService {
 
   }
 
-  getCharacters(chosenList) {
-    console.log('getCharacters ' + chosenList);
+  getDespeses(chosenList) {
+    console.log('getDespeses ' + chosenList);
 
     if ((chosenList === 'Tot')||(chosenList == '')) {
-      /*this.characters.slice();*/
-     return this.characters.filter((char) => {
+      /*this.despeses.slice();*/
+     return this.despeses.filter((char) => {
       return char.side=='';
      })
 
     }
-    return this.characters.filter((char) => {
+    return this.despeses.filter((char) => {
       console.log('Filtre ' + chosenList);
       if (chosenList=='Marc') return char.pagatPer == 1;
       if (chosenList=='Anna') return char.pagatPer == 2;
@@ -99,15 +99,14 @@ export class DespesesService {
   }
 
   onSideChosen(charInfo) {
-    const pos = this.characters.findIndex((char) => {
+    const pos = this.despeses.findIndex((char) => {
       return char.name === charInfo.name;
     })
-    this.characters[pos].side = charInfo.side;
-    this.charactersChanged.next();
+    this.despeses[pos].side = charInfo.sidedespeses.next();
     this.logService.writeLog('Changed side of ' + charInfo.name + ', new side: ' + charInfo.side);
   }
 
-  addCharacter(name: string, desc: string, dataC: string, persona: number, importC: number, idCategoria: number, targeta:boolean) {
+  addDespesa(name: string, desc: string, dataC: string, persona: number, importC: number, idCategoria: number, targeta:boolean) {
 
     let _targeta=targeta ? 1 : 0;
 

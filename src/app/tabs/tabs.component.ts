@@ -37,7 +37,7 @@ export class TabsComponent implements OnInit {
         this.CarregarPagariCobrar();
       }
     );
-    this.subscription = this.swService.charactersChanged.subscribe(
+    this.subscription = this.swService.despesesChanged.subscribe(
       () => {
         console.log('loadedSide ' + this.loadedSide);
 
